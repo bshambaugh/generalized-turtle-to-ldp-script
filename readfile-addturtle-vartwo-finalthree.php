@@ -56,10 +56,18 @@ echo 'This is the end of the array three ext'."\n";
 
 $dbg = 1;
 
-$array_three_map = array();
+//$array_three_map = array();
 
+echo 'Recove the <>'."\n";
+
+// remove the triple with <> as a the subject
 foreach($array_three as $k => $value_three) {
-    array_push($array_three_map,$array_three[$k]);
+    // array_push($array_three_map,$array_three[$k]);
+    $matchseven = preg_match('/<>/',$array_three[$k],$matches);
+    if($matchseven == 1) {
+      echo 'there is a match for'.$array_three[$k];
+      unset($array_three[$k]);
+    }
 }
 
 foreach($array_three as $i => $value_one) {
@@ -80,8 +88,10 @@ foreach($array_three_ext as $j => $value_two) {
 }
 }
 
+/*
 echo 'array three map is'."\n";
 print_r($array_three_map);
+*/
 
 ///
 echo "array three is"."\n";
