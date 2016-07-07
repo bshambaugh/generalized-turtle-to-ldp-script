@@ -1,0 +1,149 @@
+<http://data.kasabi.com/dataset/nasa/> <http://purl.org/dc/terms/source> <http://history.nasa.gov/SP-4029/Apollo_00a_Cover.htm> .
+<http://data.kasabi.com/dataset/nasa/> <http://purl.org/dc/terms/source> <http://nssdc.gsfc.nasa.gov/nmc/> .
+<http://data.kasabi.com/dataset/nasa/> <http://purl.org/dc/terms/title> "NASA Space Flight & Astronaut data" .
+<http://data.kasabi.com/dataset/nasa/> <http://rdfs.org/ns/void#exampleResource> <http://data.kasabi.com/dataset/nasa/mission/apollo-11> .
+<http://data.kasabi.com/dataset/nasa/> <http://rdfs.org/ns/void#exampleResource> <http://data.kasabi.com/dataset/nasa/person/eugeneandrewcernan> .
+<http://data.kasabi.com/dataset/nasa/> <http://rdfs.org/ns/void#exampleResource> <http://data.kasabi.com/dataset/nasa/person/neilaldenarmstrong> .
+<http://data.kasabi.com/dataset/nasa/> <http://rdfs.org/ns/void#exampleResource> <http://data.kasabi.com/dataset/nasa/spacecraft/1957-001B> .
+<http://data.kasabi.com/dataset/nasa/> <http://rdfs.org/ns/void#exampleResource> <http://data.kasabi.com/dataset/nasa/spacecraft/1969-059A> .
+<http://data.kasabi.com/dataset/nasa/> <http://rdfs.org/ns/void#exampleResource> <http://data.kasabi.com/dataset/nasa/spacecraft/1977-084A> .
+<http://data.kasabi.com/dataset/nasa/> <http://rdfs.org/ns/void#sparqlEndpoint> <http://api.talis.com/stores/space/services/sparql> .
+<http://data.kasabi.com/dataset/nasa/> <http://rdfs.org/ns/void#uriRegexPattern> "http://data.kasabi.com/dataset/nasa/.+" .
+<http://data.kasabi.com/dataset/nasa/> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://rdfs.org/ns/void#Dataset> .
+<http://data.kasabi.com/dataset/nasa/discipline/astronomy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/Discipline> .
+<http://data.kasabi.com/dataset/nasa/discipline/astronomy> <http://www.w3.org/2000/01/rdf-schema#label> "Astronomy" .
+<http://data.kasabi.com/dataset/nasa/discipline/communications> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/Discipline> .
+<http://data.kasabi.com/dataset/nasa/discipline/communications> <http://www.w3.org/2000/01/rdf-schema#label> "Communications" .
+<http://data.kasabi.com/dataset/nasa/discipline/earthscience> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/Discipline> .
+<http://data.kasabi.com/dataset/nasa/discipline/earthscience> <http://www.w3.org/2000/01/rdf-schema#label> "Earth Science" .
+<http://data.kasabi.com/dataset/nasa/discipline/engineering> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/Discipline> .
+<http://data.kasabi.com/dataset/nasa/discipline/engineering> <http://www.w3.org/2000/01/rdf-schema#label> "Engineering" .
+<http://data.kasabi.com/dataset/nasa/discipline/humancrew> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/Discipline> .
+<http://data.kasabi.com/dataset/nasa/discipline/humancrew> <http://www.w3.org/2000/01/rdf-schema#label> "Human Crew" .
+<http://data.kasabi.com/dataset/nasa/discipline/lifescience> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/Discipline> .
+<http://data.kasabi.com/dataset/nasa/discipline/lifescience> <http://www.w3.org/2000/01/rdf-schema#label> "Life Science" .
+<http://data.kasabi.com/dataset/nasa/discipline/microgravity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/Discipline> .
+<http://data.kasabi.com/dataset/nasa/discipline/microgravity> <http://www.w3.org/2000/01/rdf-schema#label> "Microgravity" .
+<http://data.kasabi.com/dataset/nasa/discipline/navigationglobalpositioning> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/Discipline> .
+<http://data.kasabi.com/dataset/nasa/discipline/navigationglobalpositioning> <http://www.w3.org/2000/01/rdf-schema#label> "Navigation & Global Positioning" .
+<http://data.kasabi.com/dataset/nasa/discipline/other> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/Discipline> .
+<http://data.kasabi.com/dataset/nasa/discipline/other> <http://www.w3.org/2000/01/rdf-schema#label> "Other" .
+<http://data.kasabi.com/dataset/nasa/discipline/planetaryscience> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/Discipline> .
+<http://data.kasabi.com/dataset/nasa/discipline/planetaryscience> <http://www.w3.org/2000/01/rdf-schema#label> "Planetary Science" .
+<http://data.kasabi.com/dataset/nasa/discipline/resupply/refurbishment/repair> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/Discipline> .
+<http://data.kasabi.com/dataset/nasa/discipline/resupply/refurbishment/repair> <http://www.w3.org/2000/01/rdf-schema#label> "Resupply/Refurbishment/Repair" .
+<http://data.kasabi.com/dataset/nasa/discipline/solarphysics> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/Discipline> .
+<http://data.kasabi.com/dataset/nasa/discipline/solarphysics> <http://www.w3.org/2000/01/rdf-schema#label> "Solar Physics" .
+<http://data.kasabi.com/dataset/nasa/discipline/spacephysics> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/Discipline> .
+<http://data.kasabi.com/dataset/nasa/discipline/spacephysics> <http://www.w3.org/2000/01/rdf-schema#label> "Space Physics" .
+<http://data.kasabi.com/dataset/nasa/discipline/surveillanceandothermilitary> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/Discipline> .
+<http://data.kasabi.com/dataset/nasa/discipline/surveillanceandothermilitary> <http://www.w3.org/2000/01/rdf-schema#label> "Surveillance and Other Military" .
+<http://data.kasabi.com/dataset/nasa/discipline/technologyapplications> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/Discipline> .
+<http://data.kasabi.com/dataset/nasa/discipline/technologyapplications> <http://www.w3.org/2000/01/rdf-schema#label> "Technology Applications" .
+<http://data.kasabi.com/dataset/nasa/discipline/uncategorizedcosmos> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/Discipline> .
+<http://data.kasabi.com/dataset/nasa/discipline/uncategorizedcosmos> <http://www.w3.org/2000/01/rdf-schema#label> "Uncategorized Cosmos" .
+<http://data.kasabi.com/dataset/nasa/launchsite/canaryislands> <http://purl.org/net/schemas/space/country> "Spain" .
+<http://data.kasabi.com/dataset/nasa/launchsite/canaryislands> <http://purl.org/net/schemas/space/place> "Canary Islands" .
+<http://data.kasabi.com/dataset/nasa/launchsite/canaryislands> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/LaunchSite> .
+<http://data.kasabi.com/dataset/nasa/launchsite/canaryislands> <http://www.w3.org/2000/01/rdf-schema#label> "Canary Islands, Spain" .
+<http://data.kasabi.com/dataset/nasa/launchsite/capecanaveral> <http://purl.org/net/schemas/space/country> "United States" .
+<http://data.kasabi.com/dataset/nasa/launchsite/capecanaveral> <http://purl.org/net/schemas/space/place> "Cape Canaveral" .
+<http://data.kasabi.com/dataset/nasa/launchsite/capecanaveral> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/LaunchSite> .
+<http://data.kasabi.com/dataset/nasa/launchsite/capecanaveral> <http://www.w3.org/2000/01/rdf-schema#label> "Cape Canaveral, United States" .
+<http://data.kasabi.com/dataset/nasa/launchsite/edwardsairforcebase> <http://purl.org/net/schemas/space/country> "United States" .
+<http://data.kasabi.com/dataset/nasa/launchsite/edwardsairforcebase> <http://purl.org/net/schemas/space/place> "Edwards Air Force Base" .
+<http://data.kasabi.com/dataset/nasa/launchsite/edwardsairforcebase> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/LaunchSite> .
+<http://data.kasabi.com/dataset/nasa/launchsite/edwardsairforcebase> <http://www.w3.org/2000/01/rdf-schema#label> "Edwards Air Force Base, United States" .
+<http://data.kasabi.com/dataset/nasa/launchsite/frenchguiana> <http://purl.org/net/schemas/space/place> "French Guiana" .
+<http://data.kasabi.com/dataset/nasa/launchsite/frenchguiana> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/LaunchSite> .
+<http://data.kasabi.com/dataset/nasa/launchsite/frenchguiana> <http://www.w3.org/2000/01/rdf-schema#label> "French Guiana" .
+<http://data.kasabi.com/dataset/nasa/launchsite/hammaguir> <http://purl.org/net/schemas/space/country> "Algeria" .
+<http://data.kasabi.com/dataset/nasa/launchsite/hammaguir> <http://purl.org/net/schemas/space/country> "French Guiana" .
+<http://data.kasabi.com/dataset/nasa/launchsite/hammaguir> <http://purl.org/net/schemas/space/place> "Hammaguir" .
+<http://data.kasabi.com/dataset/nasa/launchsite/hammaguir> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/LaunchSite> .
+<http://data.kasabi.com/dataset/nasa/launchsite/hammaguir> <http://www.w3.org/2000/01/rdf-schema#label> "Hammaguir, Algeria" .
+<http://data.kasabi.com/dataset/nasa/launchsite/hammaguir> <http://www.w3.org/2000/01/rdf-schema#label> "Hammaguir, French Guiana" .
+<http://data.kasabi.com/dataset/nasa/launchsite/isckosmotrasspaceandmissilecomplex> <http://purl.org/net/schemas/space/country> "Russia" .
+<http://data.kasabi.com/dataset/nasa/launchsite/isckosmotrasspaceandmissilecomplex> <http://purl.org/net/schemas/space/place> "ISC Kosmotras Space and Missile Complex" .
+<http://data.kasabi.com/dataset/nasa/launchsite/isckosmotrasspaceandmissilecomplex> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/LaunchSite> .
+<http://data.kasabi.com/dataset/nasa/launchsite/isckosmotrasspaceandmissilecomplex> <http://www.w3.org/2000/01/rdf-schema#label> "ISC Kosmotras Space and Missile Complex, Russia" .
+<http://data.kasabi.com/dataset/nasa/launchsite/jiuquan> <http://purl.org/net/schemas/space/country> "Peoples Republic of China" .
+<http://data.kasabi.com/dataset/nasa/launchsite/jiuquan> <http://purl.org/net/schemas/space/place> "Jiuquan" .
+<http://data.kasabi.com/dataset/nasa/launchsite/jiuquan> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/LaunchSite> .
+<http://data.kasabi.com/dataset/nasa/launchsite/jiuquan> <http://www.w3.org/2000/01/rdf-schema#label> "Jiuquan, Peoples Republic of China" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kapustinyar> <http://purl.org/net/schemas/space/country> "India" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kapustinyar> <http://purl.org/net/schemas/space/country> "Russia" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kapustinyar> <http://purl.org/net/schemas/space/country> "U.S.S.R" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kapustinyar> <http://purl.org/net/schemas/space/place> "Kapustin Yar" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kapustinyar> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/LaunchSite> .
+<http://data.kasabi.com/dataset/nasa/launchsite/kapustinyar> <http://www.w3.org/2000/01/rdf-schema#label> "Kapustin Yar, India" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kapustinyar> <http://www.w3.org/2000/01/rdf-schema#label> "Kapustin Yar, Russia" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kapustinyar> <http://www.w3.org/2000/01/rdf-schema#label> "Kapustin Yar, U.S.S.R" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kodiaklaunchcomplex> <http://purl.org/net/schemas/space/country> "United States" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kodiaklaunchcomplex> <http://purl.org/net/schemas/space/place> "Kodiak Launch Complex" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kodiaklaunchcomplex> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/LaunchSite> .
+<http://data.kasabi.com/dataset/nasa/launchsite/kodiaklaunchcomplex> <http://www.w3.org/2000/01/rdf-schema#label> "Kodiak Launch Complex, United States" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kourou> <http://purl.org/net/schemas/space/country> "France" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kourou> <http://purl.org/net/schemas/space/country> "French Guiana" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kourou> <http://purl.org/net/schemas/space/country> "Indonesia" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kourou> <http://purl.org/net/schemas/space/country> "Israel" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kourou> <http://purl.org/net/schemas/space/country> "Kazakhstan" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kourou> <http://purl.org/net/schemas/space/place> "Kourou" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kourou> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/LaunchSite> .
+<http://data.kasabi.com/dataset/nasa/launchsite/kourou> <http://www.w3.org/2000/01/rdf-schema#label> "Kourou" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kourou> <http://www.w3.org/2000/01/rdf-schema#label> "Kourou, France" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kourou> <http://www.w3.org/2000/01/rdf-schema#label> "Kourou, French Guiana" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kourou> <http://www.w3.org/2000/01/rdf-schema#label> "Kourou, Indonesia" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kourou> <http://www.w3.org/2000/01/rdf-schema#label> "Kourou, Israel" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kourou> <http://www.w3.org/2000/01/rdf-schema#label> "Kourou, Kazakhstan" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kwajalein> <http://purl.org/net/schemas/space/country> "Republic of the Marshall Islands" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kwajalein> <http://purl.org/net/schemas/space/place> "Kwajalein" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kwajalein> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/LaunchSite> .
+<http://data.kasabi.com/dataset/nasa/launchsite/kwajalein> <http://www.w3.org/2000/01/rdf-schema#label> "Kwajalein" .
+<http://data.kasabi.com/dataset/nasa/launchsite/kwajalein> <http://www.w3.org/2000/01/rdf-schema#label> "Kwajalein, Republic of the Marshall Islands" .
+<http://data.kasabi.com/dataset/nasa/launchsite/odysseysealaunchplatform> <http://purl.org/net/schemas/space/place> "Odyssey (Sea Launch Platform)" .
+<http://data.kasabi.com/dataset/nasa/launchsite/odysseysealaunchplatform> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/LaunchSite> .
+<http://data.kasabi.com/dataset/nasa/launchsite/odysseysealaunchplatform> <http://www.w3.org/2000/01/rdf-schema#label> "Odyssey (Sea Launch Platform)" .
+<http://data.kasabi.com/dataset/nasa/launchsite/palmahim> <http://purl.org/net/schemas/space/country> "Israel" .
+<http://data.kasabi.com/dataset/nasa/launchsite/palmahim> <http://purl.org/net/schemas/space/place> "Palmahim" .
+<http://data.kasabi.com/dataset/nasa/launchsite/palmahim> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/LaunchSite> .
+<http://data.kasabi.com/dataset/nasa/launchsite/palmahim> <http://www.w3.org/2000/01/rdf-schema#label> "Palmahim, Israel" .
+<http://data.kasabi.com/dataset/nasa/launchsite/peoplesrepublicofchina> <http://purl.org/net/schemas/space/place> "Peoples Republic of China" .
+<http://data.kasabi.com/dataset/nasa/launchsite/peoplesrepublicofchina> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/LaunchSite> .
+<http://data.kasabi.com/dataset/nasa/launchsite/peoplesrepublicofchina> <http://www.w3.org/2000/01/rdf-schema#label> "Peoples Republic of China" .
+<http://data.kasabi.com/dataset/nasa/launchsite/plesetsk> <http://purl.org/net/schemas/space/country> "Kazakhstan" .
+<http://data.kasabi.com/dataset/nasa/launchsite/plesetsk> <http://purl.org/net/schemas/space/country> "Russia" .
+<http://data.kasabi.com/dataset/nasa/launchsite/plesetsk> <http://purl.org/net/schemas/space/country> "U.S.S.R" .
+<http://data.kasabi.com/dataset/nasa/launchsite/plesetsk> <http://purl.org/net/schemas/space/country> "United States" .
+<http://data.kasabi.com/dataset/nasa/launchsite/plesetsk> <http://purl.org/net/schemas/space/place> "Plesetsk" .
+<http://data.kasabi.com/dataset/nasa/launchsite/plesetsk> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/LaunchSite> .
+<http://data.kasabi.com/dataset/nasa/launchsite/plesetsk> <http://www.w3.org/2000/01/rdf-schema#label> "Plesetsk, Kazakhstan" .
+<http://data.kasabi.com/dataset/nasa/launchsite/plesetsk> <http://www.w3.org/2000/01/rdf-schema#label> "Plesetsk, Russia" .
+<http://data.kasabi.com/dataset/nasa/launchsite/plesetsk> <http://www.w3.org/2000/01/rdf-schema#label> "Plesetsk, U.S.S.R" .
+<http://data.kasabi.com/dataset/nasa/launchsite/plesetsk> <http://www.w3.org/2000/01/rdf-schema#label> "Plesetsk, United States" .
+<http://data.kasabi.com/dataset/nasa/launchsite/pointarguello> <http://purl.org/net/schemas/space/country> "United States" .
+<http://data.kasabi.com/dataset/nasa/launchsite/pointarguello> <http://purl.org/net/schemas/space/place> "Point Arguello" .
+<http://data.kasabi.com/dataset/nasa/launchsite/pointarguello> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/LaunchSite> .
+<http://data.kasabi.com/dataset/nasa/launchsite/pointarguello> <http://www.w3.org/2000/01/rdf-schema#label> "Point Arguello, United States" .
+<http://data.kasabi.com/dataset/nasa/launchsite/russia> <http://purl.org/net/schemas/space/place> "Russia" .
+<http://data.kasabi.com/dataset/nasa/launchsite/russia> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/LaunchSite> .
+<http://data.kasabi.com/dataset/nasa/launchsite/russia> <http://www.w3.org/2000/01/rdf-schema#label> "Russia" .
+<http://data.kasabi.com/dataset/nasa/launchsite/russiansubmarineinbarentssea> <http://purl.org/net/schemas/space/country> "Germany" .
+<http://data.kasabi.com/dataset/nasa/launchsite/russiansubmarineinbarentssea> <http://purl.org/net/schemas/space/country> "Russia" .
+<http://data.kasabi.com/dataset/nasa/launchsite/russiansubmarineinbarentssea> <http://purl.org/net/schemas/space/place> "Russian Submarine in Barents Sea" .
+<http://data.kasabi.com/dataset/nasa/launchsite/russiansubmarineinbarentssea> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/LaunchSite> .
+<http://data.kasabi.com/dataset/nasa/launchsite/russiansubmarineinbarentssea> <http://www.w3.org/2000/01/rdf-schema#label> "Russian Submarine in Barents Sea, Germany" .
+<http://data.kasabi.com/dataset/nasa/spacecraft/1964-016D> <http://purl.org/dc/elements/1.1/description> "Zond 1 was launched from an earth orbiting platform Tyazheliy Sputnik (64-016A) towards Venus. It flew by Venus on July 14, 1964, at a distance of 100,000 km and entered a heliocentric orbit. The announced mission objectives were space research and testing of onboard systems and units. Communications from the spacecraft failed soon after May 14, 1964. " .
+<http://data.kasabi.com/dataset/nasa/spacecraft/1964-016D> <http://purl.org/net/schemas/space/agency> "U.S.S.R" .
+<http://data.kasabi.com/dataset/nasa/spacecraft/1964-016D> <http://purl.org/net/schemas/space/alternateName> "00785" .
+<http://data.kasabi.com/dataset/nasa/spacecraft/1964-016D> <http://purl.org/net/schemas/space/discipline> <http://data.kasabi.com/dataset/nasa/discipline/planetaryscience> .
+<http://data.kasabi.com/dataset/nasa/spacecraft/1964-016D> <http://purl.org/net/schemas/space/internationalDesignator> "1964-016D" .
+<http://data.kasabi.com/dataset/nasa/spacecraft/1964-016D> <http://purl.org/net/schemas/space/launch> <http://nasa.dataincubator.org/launch/1964-016> .
+<http://data.kasabi.com/dataset/nasa/spacecraft/1964-016D> <http://purl.org/net/schemas/space/mass> "890.0" .
+<http://data.kasabi.com/dataset/nasa/spacecraft/1964-016D> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/net/schemas/space/Spacecraft> .
+<http://data.kasabi.com/dataset/nasa/spacecraft/1964-016D> <http://xmlns.com/foaf/0.1/depiction> <http://nssdc.gsfc.nasa.gov/planetary/image/zond_1.jpg> .
+<http://data.kasabi.com/dataset/nasa/spacecraft/1964-016D> <http://xmlns.com/foaf/0.1/homepage> <http://nssdc.gsfc.nasa.gov/database/MasterCatalog?sc=1964-016D> .
+<http://data.kasabi.com/dataset/nasa/spacecraft/1964-016D> <http://xmlns.com/foaf/0.1/name> "Zond 1" .
+<http://nssdc.gsfc.nasa.gov/planetary/image/zond_1.jpg> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Image> .
+<http://nssdc.gsfc.nasa.gov/planetary/image/zond_1.jpg> <http://xmlns.com/foaf/0.1/depicts> <http://data.kasabi.com/dataset/nasa/spacecraft/1964-016D> .
+<http://nssdc.gsfc.nasa.gov/planetary/image/zond_1.jpg> <http://xmlns.com/foaf/0.1/thumbnail> <http://nssdc.gsfc.nasa.gov/planetary/thumbnail/zond_1.gif> .
