@@ -242,4 +242,39 @@ foreach($filerow_to_array as $key => $value) {
 
 }
 
+// create a function that creates an ldp container..and that is it...
+function createldpcontainer($rootcontainer,$target_container) {
+  $url = $rootcontainer.$target_container;
+  $headers = array('Accept' => 'text/turtle');
+  $response = Requests::get($url,$headers);
+  if($response->status_code == 404) {
+    $headers_two = array('Content-Type' => 'text/turtle','Slug' => $target_container);
+    $response = Requests::post($rootcontainer, $headers_two);
+    $string = $response->raw;
+    preg_match('/Location: http[:\/a-z0-9-_A-Z]*/',$string,$matches);
+    $substring = $matches[0];
+    preg_match('/http[:\/a-z0-9-_A-Z]*/',$substring,$matches);
+    $url = $matches[0];
+  }
+}
+
+function putrequest($data,$url) {
+  //$url = 'http://localhost:8080/marmotta/ldp/'.$containertitle;
+  $existingheaders = get_headers($url);
+  print_r($existingheaders);
+  echo($existingheaders[5]);
+  $etag = preg_replace('/ETag: /i','',$existingheaders[5]);
+  echo("\n");
+  echo($etag);
+  echo("\n");
+  // do I need the container tag in the header for the put request, it would be easier if I did not need to know ... try it
+  //$headers = array('Content-Type' => 'text/turtle','If-Match' => $etag,'Slug' => $containertitle);
+  $headers = array('Content-Type' => 'text/turtle','If-Match' => $etag);
+  //$headers = array('Content-Type' => 'text/turtle','If-Match' => 'W/"1459004153000"','Slug' => 'Penguins are Awesome');
+  $response = Requests::put($url, $headers, $data);
+  //$response = Requests:_put($url, $headers, json_encode($data));
+  var_dump($response->body);
+}
+
+
 ?>
