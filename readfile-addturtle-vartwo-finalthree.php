@@ -218,11 +218,16 @@ $string = $rootcontainer;
 
 
  for($i = 0; $i < $count; $i++) {
- if($dbg == 1){
+ if($dbg == 2){
   echo 'root container: '.$string.', target container: '.$array_six[$keyone][$i]."\n";
   }
 //  createldpcontainer($string,$array_six[$keyone][$i],$dbg);
   $string = $string.$array_six[$keyone][$i].'/';
+  // I need to add code here to give a title to each ldp container...
+  echo 'The new string is '.$string.' and the title is '.$array_six[$keyone][$i]."\n";
+  $container_title = '<> '.'<http://purl.org/dc/terms/title> '.'"'.$array_six[$keyone][$i].'" .'."\n";
+  echo $container_title."\n";
+//  putrequest($container_title,$string,$dbg);
  }
 
 /// replace array elements with the local namespace...
