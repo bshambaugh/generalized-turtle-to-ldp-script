@@ -3,9 +3,9 @@ include('./Requests/library/Requests.php');
 Requests::register_autoloader();
 //$filename = 'first_one-hundred-nasa-spacecraft-filtered-addjpg.nt';
 //$filename = 'first_one-hundred-nasa-spacecraft-filtered.nt';
-$filename = 'nasa-spacecraft-filtered.nt';
-//$filename = 'nasa-spacecraft-selected.nt';
-$dbg = 2;
+//$filename = 'nasa-spacecraft-filtered.nt';
+$filename = 'nasa-spacecraft-selected.nt';
+$dbg = 1;
 $fp = fopen($filename,'rw');
 $string = fread($fp, filesize($filename));
 fclose($fp);
@@ -24,6 +24,7 @@ var_dump($filerow_to_array);
 
 $map_two = array();
 
+echo 'This is the start of map two'."\n";
 foreach($filerow_to_array as $key => $value) {
   $matchtwo = preg_match('/^<[0-9A-Za-z:_\.\/#-]*>/',$filerow_to_array[$key],$matches);
   if($matchtwo == 1) {
@@ -33,6 +34,56 @@ foreach($filerow_to_array as $key => $value) {
     $map_two[$key] = $matches[0];
   }
 }
+
+echo 'code to grab to object uris'."\n";
+
+foreach($filerow_to_array as $key => $value) {
+  $matchtwo = preg_match('/<[a-zA-Z0-9_:#-\/\.]*> .$/',$filerow_to_array[$key],$matches);
+  if($matchtwo == 1) {
+    if($dbg == 1) {
+    echo $matches[0]."\n";
+    }
+    $forstringminusperiod = $matches[0];
+    $stringminusperiod = preg_replace('/ .$/','',$forstringminusperiod);
+    $map_two_end[$key] = $stringminusperiod;
+  }
+}
+
+echo 'end of code to grab the object uris'."\n";
+
+// code to select what you want from object uris..
+
+$selectedobjecturiprefixes = array('data.kasabi.com');
+
+$objectmatches = array();
+
+//print_r($replacementarray);
+
+foreach($map_two_end as $key => $value) {
+  $objectarrayelement = $map_two_end[$key];
+  foreach($selectedobjecturiprefixes as $keytwo => $valuetwo) {
+     $prefixelementtostring = $selectedobjecturiprefixes[$keytwo];
+     $prefixpattern = preg_quote($prefixelementtostring,'/');
+     $regexforreplaceindata = '/'.$prefixpattern.'/';
+     $matchprefixdata = preg_match($regexforreplaceindata,$objectarrayelement,$matches);
+     if($matchprefixdata == 1) {
+        array_push($objectmatches,$objectarrayelement);
+        array_push($map_two,$objectarrayelement);
+     }
+ }
+}
+
+echo 'The matching objects are'."\n";
+foreach ($objectmatches as $key => $value) {
+    echo $objectmatches[$key]."\n";
+}
+
+echo 'The matching objects with map two are'."\n";
+foreach ($map_two as $key => $value) {
+    echo $map_two[$key]."\n";
+}
+
+// end of selected object uris
 
 if($dbg == 1) {
 echo '------------------This is map one:----------------';
@@ -97,18 +148,32 @@ foreach($array_three as $k => $value_three) {
     }
 }
 
+$array_three_rebased = array();
+foreach($array_three as $key => $value) {
+  array_push($array_three_rebased,$array_three[$key]);
+}
+
+echo 'Print array three rebased'."\n";
+print_r($array_three_rebased);
+
+// create a map of array three rebased
+$array_three_rebased_map = array();
+foreach($array_three_rebased as $key => $value) {
+  array_push($array_three_rebased_map,$array_three_rebased[$key]);
+}
+
 // get rid of the undefined offset by replacing the array_three with the array_three_map ...(make sure to rebase the coordinates)
-foreach($array_three as $i => $value_one) {
+foreach($array_three_rebased_map as $i => $value_one) {
 foreach($array_three_ext as $j => $value_two) {
-  if($array_three[$i] == $array_three_ext[$j]) {
+  if($array_three_rebased_map[$i] == $array_three_ext[$j]) {
     if($dbg == 1){
-      echo("We are equal for ".$array_three[$i]." and ".$array_three_ext[$j]);
+      echo("We are equal for ".$array_three_rebased_map[$i]." and ".$array_three_ext[$j]);
       echo("\r\n");
     }
-     unset($array_three[$i]);
-  } elseif ($array_three[$i] !== $array_three_ext[$j]) {
+     unset($array_three_rebased[$i]);
+  } elseif ($array_three_rebased_map[$i] !== $array_three_ext[$j]) {
     if($dbg == 1){
-    echo("We are not equal for ".$array_three[$i]." and ".$array_three_ext[$j]);
+    echo("We are not equal for ".$array_three_rebased_map[$i]." and ".$array_three_ext[$j]);
     echo("\r\n");
    }
   }
@@ -129,6 +194,25 @@ print_r($array_three);
 echo "\n";
 }
 
+if($dbg == 1){
+echo "array three rebased is"."\n";
+print_r($array_three_rebased);
+
+echo "\n";
+}
+
+$array_three_rebased_rebased = array();
+foreach($array_three_rebased as $key => $value) {
+  array_push($array_three_rebased_rebased,$array_three_rebased[$key]);
+}
+
+if($dbg == 1){
+echo "array three rebased rebased is"."\n";
+print_r($array_three_rebased_rebased);
+
+echo "\n";
+}
+
 // nest all of these arrays in the future..
 $array_six = array();
 
@@ -136,12 +220,12 @@ $array_six = array();
 foreach($array_three_ext as $keyone => $value) {
 }
 
-foreach($array_three as $key => $value) {
-  $replace_one =  preg_replace('/[<>]/','',$array_three[$key]);
+foreach($array_three_rebased_rebased as $key => $value) {
+  $replace_one =  preg_replace('/[<>]/','',$array_three_rebased_rebased[$key]);
   $replace_two = preg_replace('/http:\/\/[a-zA-Z0-9\.-]*\//','',$replace_one);
   $pizza = explode('/',$replace_two);
   foreach($pizza as $key_three => $value) {
-    $array_six[strval($array_three[$key])][$key_three] = strval($pizza[$key_three]);
+    $array_six[strval($array_three_rebased_rebased[$key])][$key_three] = strval($pizza[$key_three]);
   }
 }
 
@@ -213,26 +297,26 @@ echo 'end of data'."\n";
   }
 
 $string = '';
-$rootcontainer = 'http://localhost:8080/marmotta/ldp/test8/';
+$rootcontainer = 'http://localhost:8080/marmotta/ldp/test10/';
 $string = $rootcontainer;
 
 
  for($i = 0; $i < $count; $i++) {
- if($dbg == 2){
+ if($dbg == 1){
   echo 'root container: '.$string.', target container: '.$array_six[$keyone][$i]."\n";
   }
-//  createldpcontainer($string,$array_six[$keyone][$i],$dbg);
+ createldpcontainer($string,$array_six[$keyone][$i],$dbg);
   $string = $string.$array_six[$keyone][$i].'/';
   // I need to add code here to give a title to each ldp container...
   echo 'The new string is '.$string.' and the title is '.$array_six[$keyone][$i]."\n";
   $container_title = '<> '.'<http://purl.org/dc/terms/title> '.'"'.$array_six[$keyone][$i].'" .'."\n";
   echo $container_title."\n";
-//  putrequest($container_title,$string,$dbg);
+  putrequest($container_title,$string,$dbg);
  }
 
 /// replace array elements with the local namespace...
- foreach($array_three as $key => $value) {
-     $elementtostring = $array_three[$key];
+ foreach($array_three_rebased_rebased as $key => $value) {
+     $elementtostring = $array_three_rebased_rebased[$key];
      $patternfromarray = preg_quote($elementtostring,'/');
      $regexforreplaceindata = '/'.$patternfromarray.'/';
      $rootcontainer = 'http://localhost:8080/marmotta/ldp/';
@@ -260,7 +344,7 @@ $string = $rootcontainer;
 
 
 $url = $string;
-if($dbg == 2){
+if($dbg == 1){
 echo 'start of ldp put'."\n";
 echo 'The url is: '.$url."\n";
 echo 'The data is: '."\n";
@@ -268,7 +352,7 @@ echo $data;
 echo "\n";
 echo 'end of ldp put'."\n";
 }
-// putrequest($data,$url,$dbg);
+ putrequest($data,$url,$dbg);
 
 }
 
@@ -304,15 +388,15 @@ foreach($filerow_to_array as $key => $value) {
   echo 'end of data'."\n";
 }
 
-  $rootcontainer = 'http://localhost:8080/marmotta/ldp/test8';
+  $rootcontainer = 'http://localhost:8080/marmotta/ldp/test10';
 
-  foreach($array_three as $key => $value) {
+  foreach($array_three_rebased_rebased as $key => $value) {
     $pattern = preg_quote($array_three[$key],'/');
     $regex = '/'.$pattern.'/';
     $matcheight = preg_match($regex,$data,$matches);
    if($matcheight == 1) {
      if($dbg == 1){
-      echo 'I match for ---- <<<<giant centipede>>>>'.$array_three[$key]."\n";
+      echo 'I match for ---- <<<<giant centipede>>>>'.$array_three_rebased_rebased[$key]."\n";
     }
       $pumpkin = preg_replace('/http:\/\/[A-Za-z\.]*/',$rootcontainer,$array_three[$key]);
      if($dbg == 1){
@@ -326,7 +410,7 @@ foreach($filerow_to_array as $key => $value) {
      if($dbg == 1){
       echo 'the url for posting the jpg is:'.$url."\n";
      }
-    //  putrequest($data,$url,$dbg);
+      putrequest($data,$url,$dbg);
       // post to the ldp continer here...
    }
   }
