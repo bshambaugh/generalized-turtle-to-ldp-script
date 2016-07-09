@@ -24,7 +24,9 @@ var_dump($filerow_to_array);
 
 $map_two = array();
 
+if($dbg == 1) {
 echo 'This is the start of map two'."\n";
+}
 foreach($filerow_to_array as $key => $value) {
   $matchtwo = preg_match('/^<[0-9A-Za-z:_\.\/#-]*>/',$filerow_to_array[$key],$matches);
   if($matchtwo == 1) {
@@ -34,9 +36,9 @@ foreach($filerow_to_array as $key => $value) {
     $map_two[$key] = $matches[0];
   }
 }
-
+if($dbg == 1) {
 echo 'code to grab to object uris'."\n";
-
+}
 foreach($filerow_to_array as $key => $value) {
   $matchtwo = preg_match('/<[a-zA-Z0-9_:#-\/\.]*> .$/',$filerow_to_array[$key],$matches);
   if($matchtwo == 1) {
@@ -49,7 +51,9 @@ foreach($filerow_to_array as $key => $value) {
   }
 }
 
+if($dbg == 1) {
 echo 'end of code to grab the object uris'."\n";
+}
 
 // code to select what you want from object uris..
 
@@ -73,14 +77,20 @@ foreach($map_two_end as $key => $value) {
  }
 }
 
+if($dbg == 1) {
 echo 'The matching objects are'."\n";
+
+
 foreach ($objectmatches as $key => $value) {
     echo $objectmatches[$key]."\n";
 }
+}
 
+if($dbg == 1) {
 echo 'The matching objects with map two are'."\n";
 foreach ($map_two as $key => $value) {
     echo $map_two[$key]."\n";
+}
 }
 
 // end of selected object uris
@@ -153,8 +163,10 @@ foreach($array_three as $key => $value) {
   array_push($array_three_rebased,$array_three[$key]);
 }
 
+if($dbg == 1) {
 echo 'Print array three rebased'."\n";
 print_r($array_three_rebased);
+}
 
 // create a map of array three rebased
 $array_three_rebased_map = array();
@@ -308,9 +320,13 @@ $string = $rootcontainer;
  createldpcontainer($string,$array_six[$keyone][$i],$dbg);
   $string = $string.$array_six[$keyone][$i].'/';
   // I need to add code here to give a title to each ldp container...
+  if($dbg == 1) {
   echo 'The new string is '.$string.' and the title is '.$array_six[$keyone][$i]."\n";
-  $container_title = '<> '.'<http://purl.org/dc/terms/title> '.'"'.$array_six[$keyone][$i].'" .'."\n";
+  }
+  $container_title = '<> '.'<http://purl.org/dc/terms/title> '.'"'.$array_six[$keyone][$i].'" .';
+  if($dbg == 1) {
   echo $container_title."\n";
+   }
   putrequest($container_title,$string,$dbg);
  }
 
@@ -391,14 +407,14 @@ foreach($filerow_to_array as $key => $value) {
   $rootcontainer = 'http://localhost:8080/marmotta/ldp/test10';
 
   foreach($array_three_rebased_rebased as $key => $value) {
-    $pattern = preg_quote($array_three[$key],'/');
+    $pattern = preg_quote($array_three_rebased_rebased[$key],'/');
     $regex = '/'.$pattern.'/';
     $matcheight = preg_match($regex,$data,$matches);
    if($matcheight == 1) {
      if($dbg == 1){
       echo 'I match for ---- <<<<giant centipede>>>>'.$array_three_rebased_rebased[$key]."\n";
     }
-      $pumpkin = preg_replace('/http:\/\/[A-Za-z\.]*/',$rootcontainer,$array_three[$key]);
+      $pumpkin = preg_replace('/http:\/\/[A-Za-z\.]*/',$rootcontainer,$array_three_rebased_rebased[$key]);
      if($dbg == 1){
       echo 'Pumpkin is'.$pumpkin."\n";
      }
