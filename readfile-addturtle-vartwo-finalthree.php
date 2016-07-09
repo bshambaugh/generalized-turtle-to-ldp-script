@@ -5,7 +5,7 @@ Requests::register_autoloader();
 //$filename = 'first_one-hundred-nasa-spacecraft-filtered.nt';
 $filename = 'nasa-spacecraft-filtered.nt';
 //$filename = 'nasa-spacecraft-selected.nt';
-$dbg = 0;
+$dbg = 2;
 $fp = fopen($filename,'rw');
 $string = fread($fp, filesize($filename));
 fclose($fp);
@@ -97,6 +97,7 @@ foreach($array_three as $k => $value_three) {
     }
 }
 
+// get rid of the undefined offset by replacing the array_three with the array_three_map ...(make sure to rebase the coordinates)
 foreach($array_three as $i => $value_one) {
 foreach($array_three_ext as $j => $value_two) {
   if($array_three[$i] == $array_three_ext[$j]) {
@@ -114,6 +115,7 @@ foreach($array_three_ext as $j => $value_two) {
 }
 }
 
+// after this further process array three by adding the objects from a particular namespace that should have ldp containers
 /*
 echo 'array three map is'."\n";
 print_r($array_three_map);
@@ -219,7 +221,7 @@ $string = $rootcontainer;
  if($dbg == 1){
   echo 'root container: '.$string.', target container: '.$array_six[$keyone][$i]."\n";
   }
-  createldpcontainer($string,$array_six[$keyone][$i],$dbg);
+//  createldpcontainer($string,$array_six[$keyone][$i],$dbg);
   $string = $string.$array_six[$keyone][$i].'/';
  }
 
@@ -238,9 +240,22 @@ $string = $rootcontainer;
    }
  }
 
+ $replacementarray = array('purl.org/net' => 'data.thespaceplan.com','data.kasabi.com' => 'localhost:8080/marmotta/ldp');
+
+ //print_r($replacementarray);
+
+ foreach($replacementarray as $key => $value) {
+  // echo $key.' '.$replacementarray[$key]."\n";
+   $replacementstring = $replacementarray[$key];
+   $arraypatterntoreplace = preg_quote($key,'/');
+   $regexforreplaceindatafromarray = '/'.$arraypatterntoreplace.'/';
+   $dataintermed = preg_replace($regexforreplaceindatafromarray,$replacementstring,$data);
+   $data = $dataintermed;
+ }
+
 
 $url = $string;
-if($dbg == 1){
+if($dbg == 2){
 echo 'start of ldp put'."\n";
 echo 'The url is: '.$url."\n";
 echo 'The data is: '."\n";
@@ -248,7 +263,7 @@ echo $data;
 echo "\n";
 echo 'end of ldp put'."\n";
 }
- putrequest($data,$url,$dbg);
+// putrequest($data,$url,$dbg);
 
 }
 
@@ -306,7 +321,7 @@ foreach($filerow_to_array as $key => $value) {
      if($dbg == 1){
       echo 'the url for posting the jpg is:'.$url."\n";
      }
-      putrequest($data,$url,$dbg);
+    //  putrequest($data,$url,$dbg);
       // post to the ldp continer here...
    }
   }
