@@ -63,6 +63,7 @@ $objectmatches = array();
 
 //print_r($replacementarray);
 
+// select the object with the specified prefix
 foreach($map_two_end as $key => $value) {
   $objectarrayelement = $map_two_end[$key];
   foreach($selectedobjecturiprefixes as $keytwo => $valuetwo) {
@@ -112,6 +113,7 @@ echo "\n";
 }
 
 foreach($array_three as $key => $value) {
+  // match each element with an extension
    $string_two = preg_match('/^<[0-9A-Za-z:_\/\.#]*\.[A-Za-z]{3,}>/',$array_three[$key],$matches);
   // preg_match('/[0-9A-Za-z_\.]*$>/',$array_three[$key],$matches);
   if($dbg == 1) {
@@ -158,6 +160,7 @@ foreach($array_three as $k => $value_three) {
     }
 }
 
+// put the array in order
 $array_three_rebased = array();
 foreach($array_three as $key => $value) {
   array_push($array_three_rebased,$array_three[$key]);
@@ -232,12 +235,13 @@ $array_six = array();
 foreach($array_three_ext as $keyone => $value) {
 }
 
+// explode array element into ldp container
 foreach($array_three_rebased_rebased as $key => $value) {
   $replace_one =  preg_replace('/[<>]/','',$array_three_rebased_rebased[$key]);
   $replace_two = preg_replace('/http:\/\/[a-zA-Z0-9\.-]*\//','',$replace_one);
-  $pizza = explode('/',$replace_two);
-  foreach($pizza as $key_three => $value) {
-    $array_six[strval($array_three_rebased_rebased[$key])][$key_three] = strval($pizza[$key_three]);
+  $explodintoldpcontainer = explode('/',$replace_two);
+  foreach($explodintoldpcontainer as $key_three => $value) {
+    $array_six[strval($array_three_rebased_rebased[$key])][$key_three] = strval($explodintoldpcontainer[$key_three]);
   }
 }
 
@@ -252,14 +256,15 @@ foreach($array_six as $keyone => $value) {
 
 $matches = array(NULL);
 $matchesarraytwo = array();
-$ahappystring = $keyone;
+$regexstringforcontainer = $keyone;
 //$ahappystring = '<http://data.kasabi.com/dataset/nasa/launchsite/hammaguir>';
-$pattern = preg_quote($ahappystring,'/');
+$pattern = preg_quote($regexstringforcontainer,'/');
 $regex = '/^'.$pattern.' <[a-zA-Z0-9_:#-\/\.]*> (<[a-zA-Z0-9_:#-\/\.]*>|"[a-z ,A-z0-9-]*") ./';
 
 
 foreach($filerow_to_array as $key => $value) {
 $matches[0] = NULL;
+// Match triples to container for post to a particular container
 $firstmatch = preg_match($regex,$filerow_to_array[$key],$matches);
 if($firstmatch == 1) {
 if($dbg == 1){
@@ -279,10 +284,13 @@ foreach($matchesarraytwo as $key => $value) {
 if($dbg == 1){
   echo $matchesarraytwo[$key]."\n";
 }
+// replace the period at the end of each triple with a semicolon
  $matchesarraytwo[$key] = preg_replace('/.$/','; ',$matchesarraytwo[$key]);
+ // remove the first element in the triple to prepare to write as compacted turtle
  $matchesarraytwo[$key] = preg_replace('/^<[0-9A-Za-z\.\/_#:-]*> /','',$matchesarraytwo[$key]);
 }
 
+// Create the raw data to post of the ldp container
 // I stopped looking at the code here...
 $stringarray = implode($matchesarraytwo);
 $data = '<> '.$stringarray;
@@ -296,6 +304,7 @@ echo 'end of data'."\n";
 // first take the array to create the ldp container...
 // then post the data...
 
+// count the number of containers below the master root container
   $count = 0;
   foreach (array_filter($array_six[$keyone]) as $keytwo => $value) {
     if($dbg == 1){
@@ -309,46 +318,57 @@ echo 'end of data'."\n";
   }
 
 $string = '';
-$rootcontainer = 'http://localhost:8080/marmotta/ldp/test10/';
+$rootcontainer = 'http://localhost:8080/marmotta/ldp/test12/';
 $string = $rootcontainer;
 
 
  for($i = 0; $i < $count; $i++) {
  if($dbg == 1){
   echo 'root container: '.$string.', target container: '.$array_six[$keyone][$i]."\n";
-  }
+}
+  // create each ldp container (do I need to post array six)
  createldpcontainer($string,$array_six[$keyone][$i],$dbg);
+ // create the new ldp root container
   $string = $string.$array_six[$keyone][$i].'/';
   // I need to add code here to give a title to each ldp container...
   if($dbg == 1) {
   echo 'The new string is '.$string.' and the title is '.$array_six[$keyone][$i]."\n";
   }
+  // Prepare the data to post the title to the ldp container
   $container_title = '<> '.'<http://purl.org/dc/terms/title> '.'"'.$array_six[$keyone][$i].'" .';
   if($dbg == 1) {
   echo $container_title."\n";
    }
+   // post the title of the container as the previous target container name to each container
   putrequest($container_title,$string,$dbg);
  }
 
 /// replace array elements with the local namespace...
  foreach($array_three_rebased_rebased as $key => $value) {
+    // assign a string to the present array element
      $elementtostring = $array_three_rebased_rebased[$key];
+     // convert string to regular expression
      $patternfromarray = preg_quote($elementtostring,'/');
      $regexforreplaceindata = '/'.$patternfromarray.'/';
      $rootcontainer = 'http://localhost:8080/marmotta/ldp/';
+     // Find candidates to replace in the data
      $changedata = preg_match($regexforreplaceindata,$data,$matches);
   if($changedata == 1) {
      $matchelementindata = $matches[0];
+     // Transform the data matches to the local namespace
      $tolocalnamespace = preg_replace('/http:\/\/[A-Za-z0-9\.]*\//',$rootcontainer,$matchelementindata);
+     // perform replacements in the data
      $datatemp = preg_replace($regexforreplaceindata,$tolocalnamespace,$data);
      $data = $datatemp;
    }
  }
 
+ // array to replace selected prefixes in the data
  $replacementarray = array('purl.org/net' => 'data.thespaceplan.com','data.kasabi.com' => 'localhost:8080/marmotta/ldp');
 
  //print_r($replacementarray);
 
+// run through each replacement in the replacement array and apply it to the data
  foreach($replacementarray as $key => $value) {
   // echo $key.' '.$replacementarray[$key]."\n";
    $replacementstring = $replacementarray[$key];
@@ -376,11 +396,13 @@ echo 'end of ldp put'."\n";
 
 foreach($array_three_ext as $key => $value) {
   $matchesarraytwo = array();
-  $ahappystring = $array_three_ext[$key];
-  $pattern = preg_quote($ahappystring,'/');
+  $arrayelementasstring = $array_three_ext[$key];
+  $pattern = preg_quote($arrayelementasstring,'/');
+  // match triples with the subject uri with the file extension
   $regex = '/^'.$pattern.' <[a-zA-Z0-9_:#-\/\.]*> (<[a-zA-Z0-9_:#-\/\.]*>|"[a-z ,A-z0-9-]*") ./';
 
 foreach($filerow_to_array as $key => $value) {
+  // grab all triples in the raw data that have the subject uri with the file extension
   $matchfive = preg_match($regex,$filerow_to_array[$key],$matches);
   if($matchfive == 1) {
     array_push($matchesarraytwo,$matches[0]);
@@ -391,12 +413,16 @@ foreach($filerow_to_array as $key => $value) {
     if($dbg == 1){
     echo $matchesarraytwo[$key]."\n";
    }
+    // replace the period at the end of each triple with a semicolon
     $matchesarraytwo[$key] = preg_replace('/.$/','; ',$matchesarraytwo[$key]);
+    // remove the first element in the triple to prepare to write as compacted turtle
     $matchesarraytwo[$key] = preg_replace('/^<[0-9A-Za-z\.\/_#:-]*> /','',$matchesarraytwo[$key]);
   }
 
+  // create a string from the array...
   $stringarray = implode($matchesarraytwo);
-  $data = '<> '.' skos:member '.$ahappystring.' . '.$ahappystring.' '.$stringarray;
+  $data = '<> '.' skos:member '.$arrayelementasstring.' . '.$arrayelementasstring.' '.$stringarray;
+  // change the terminator in the data to a period to complete the conpacted turtle
   $data = preg_replace('/; $/','.',$data);
   if($dbg == 1){
   echo 'the data is:'."\n";
@@ -404,7 +430,7 @@ foreach($filerow_to_array as $key => $value) {
   echo 'end of data'."\n";
 }
 
-  $rootcontainer = 'http://localhost:8080/marmotta/ldp/test10';
+  $rootcontainer = 'http://localhost:8080/marmotta/ldp/test12';
 
   foreach($array_three_rebased_rebased as $key => $value) {
     $pattern = preg_quote($array_three_rebased_rebased[$key],'/');
@@ -412,20 +438,21 @@ foreach($filerow_to_array as $key => $value) {
     $matcheight = preg_match($regex,$data,$matches);
    if($matcheight == 1) {
      if($dbg == 1){
-      echo 'I match for ---- <<<<giant centipede>>>>'.$array_three_rebased_rebased[$key]."\n";
+      echo 'I have a container match in the post data'.$array_three_rebased_rebased[$key]."\n";
     }
-      $pumpkin = preg_replace('/http:\/\/[A-Za-z\.]*/',$rootcontainer,$array_three_rebased_rebased[$key]);
+      $containerfileexttriples = preg_replace('/http:\/\/[A-Za-z\.]*/',$rootcontainer,$array_three_rebased_rebased[$key]);
      if($dbg == 1){
-      echo 'Pumpkin is'.$pumpkin."\n";
+      echo 'The title for the post container is'.$containerfileexttriples."\n";
      }
       $data = preg_replace($regex,'<>',$data);
      if($dbg == 1){
       echo 'the data for posting is'.$data."\n";
      }
-      $url = preg_replace('/[<>]/','',$pumpkin);
+      $url = preg_replace('/[<>]/','',$containerfileexttriples);
      if($dbg == 1){
-      echo 'the url for posting the jpg is:'.$url."\n";
+      echo 'the url for posting the extension triples is:'.$url."\n";
      }
+      // pot the extension triples in an existing ldp container
       putrequest($data,$url,$dbg);
       // post to the ldp continer here...
    }
@@ -438,15 +465,18 @@ foreach($filerow_to_array as $key => $value) {
 function createldpcontainer($rootcontainer,$target_container,$dbg) {
   $url = $rootcontainer.$target_container;
   $headers = array('Accept' => 'text/turtle');
+  // first check to see if the container exists
   $response = Requests::get($url,$headers);
   if($dbg == 1){
   echo 'The result of get is'."\n";
   var_dump($response->raw);
   }
+  // create the container if it does not exist..
   if($response->status_code == 404) {
     $headers_two = array('Content-Type' => 'text/turtle','Slug' => $target_container);
     $response = Requests::post($rootcontainer, $headers_two);
     $string = $response->raw;
+    // match the url in the raw response
     preg_match('/Location: http[:\/a-z0-9-_A-Z]*/',$string,$matches);
     $substring = $matches[0];
     preg_match('/http[:\/a-z0-9-_A-Z]*/',$substring,$matches);
@@ -454,6 +484,7 @@ function createldpcontainer($rootcontainer,$target_container,$dbg) {
   }
 }
 
+// create a function that posts data to a container
 function putrequest($data,$url,$dbg) {
   //$url = 'http://localhost:8080/marmotta/ldp/'.$containertitle;
   $existingheaders = get_headers($url);
