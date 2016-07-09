@@ -327,7 +327,7 @@ $string = $rootcontainer;
   echo 'root container: '.$string.', target container: '.$array_six[$keyone][$i]."\n";
 }
   // create each ldp container (do I need to post array six)
- createldpcontainer($string,$array_six[$keyone][$i],$dbg);
+  createldpcontainer($string,$array_six[$keyone][$i],$dbg);
  // create the new ldp root container
   $string = $string.$array_six[$keyone][$i].'/';
   // I need to add code here to give a title to each ldp container...
@@ -340,7 +340,7 @@ $string = $rootcontainer;
   echo $container_title."\n";
    }
    // post the title of the container as the previous target container name to each container
-  putrequest($container_title,$string,$dbg);
+   putrequest($container_title,$string,$dbg);
  }
 
 /// replace array elements with the local namespace...
@@ -421,7 +421,7 @@ foreach($filerow_to_array as $key => $value) {
 
   // create a string from the array...
   $stringarray = implode($matchesarraytwo);
-  $data = '<> '.' skos:member '.$arrayelementasstring.' . '.$arrayelementasstring.' '.$stringarray;
+  $data = '<> '.'skos:member '.$arrayelementasstring.' . '.$arrayelementasstring.' '.$stringarray;
   // change the terminator in the data to a period to complete the conpacted turtle
   $data = preg_replace('/; $/','.',$data);
   if($dbg == 1){
