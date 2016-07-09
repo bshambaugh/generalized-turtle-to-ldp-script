@@ -223,6 +223,21 @@ $string = $rootcontainer;
   $string = $string.$array_six[$keyone][$i].'/';
  }
 
+/// replace array elements with the local namespace...
+ foreach($array_three as $key => $value) {
+     $elementtostring = $array_three[$key];
+     $patternfromarray = preg_quote($elementtostring,'/');
+     $regexforreplaceindata = '/'.$patternfromarray.'/';
+     $rootcontainer = 'http://localhost:8080/marmotta/ldp/';
+     $changedata = preg_match($regexforreplaceindata,$data,$matches);
+  if($changedata == 1) {
+     $matchelementindata = $matches[0];
+     $tolocalnamespace = preg_replace('/http:\/\/[A-Za-z0-9\.]*\//',$rootcontainer,$matchelementindata);
+     $datatemp = preg_replace($regexforreplaceindata,$tolocalnamespace,$data);
+     $data = $datatemp;
+   }
+ }
+
 
 $url = $string;
 if($dbg == 1){
