@@ -3,8 +3,8 @@ include('./Requests/library/Requests.php');
 Requests::register_autoloader();
 //$filename = 'first_one-hundred-nasa-spacecraft-filtered-addjpg.nt';
 //$filename = 'first_one-hundred-nasa-spacecraft-filtered.nt';
-//$filename = 'nasa-spacecraft-filtered.nt';
-$filename = 'nasa-spacecraft-selected.nt';
+$filename = 'nasa-spacecraft-filtered.nt';
+//$filename = 'nasa-spacecraft-selected.nt';
 $dbg = 1;
 $fp = fopen($filename,'rw');
 $string = fread($fp, filesize($filename));
@@ -318,7 +318,7 @@ echo 'end of data'."\n";
   }
 
 $string = '';
-$rootcontainer = 'http://localhost:8080/marmotta/ldp/test12/';
+$rootcontainer = 'http://localhost:8080/marmotta/ldp/';
 $string = $rootcontainer;
 
 
@@ -364,7 +364,7 @@ $string = $rootcontainer;
  }
 
  // array to replace selected prefixes in the data
- $replacementarray = array('purl.org/net' => 'data.thespaceplan.com','data.kasabi.com' => 'localhost:8080/marmotta/ldp');
+ $replacementarray = array('purl.org/net' => 'data.thespaceplan.com','data.kasabi.com' => 'investors.ddns.net:8080/marmotta/ldp');
 
  //print_r($replacementarray);
 
@@ -430,7 +430,7 @@ foreach($filerow_to_array as $key => $value) {
   echo 'end of data'."\n";
 }
 
-  $rootcontainer = 'http://localhost:8080/marmotta/ldp/test12';
+  $rootcontainer = 'http://localhost:8080/marmotta/ldp';
 
   foreach($array_three_rebased_rebased as $key => $value) {
     $pattern = preg_quote($array_three_rebased_rebased[$key],'/');
@@ -463,6 +463,7 @@ foreach($filerow_to_array as $key => $value) {
 
 // create a function that creates an ldp container..and that is it...
 function createldpcontainer($rootcontainer,$target_container,$dbg) {
+  $auth = base64_encode('username:password');
   $url = $rootcontainer.$target_container;
   $headers = array('Accept' => 'text/turtle');
   // first check to see if the container exists
@@ -473,7 +474,7 @@ function createldpcontainer($rootcontainer,$target_container,$dbg) {
   }
   // create the container if it does not exist..
   if($response->status_code == 404) {
-    $headers_two = array('Content-Type' => 'text/turtle','Slug' => $target_container);
+    $headers_two = array('Content-Type' => 'text/turtle','Slug' => $target_container,'Authorization' => 'Basic '.$auth);
     $response = Requests::post($rootcontainer, $headers_two);
     $string = $response->raw;
     // match the url in the raw response
@@ -487,6 +488,7 @@ function createldpcontainer($rootcontainer,$target_container,$dbg) {
 // create a function that posts data to a container
 function putrequest($data,$url,$dbg) {
   //$url = 'http://localhost:8080/marmotta/ldp/'.$containertitle;
+  $auth = base64_encode('username:password');
   $existingheaders = get_headers($url);
   if($dbg == 1){
   print_r($existingheaders);
@@ -500,7 +502,7 @@ function putrequest($data,$url,$dbg) {
   }
   // do I need the container tag in the header for the put request, it would be easier if I did not need to know ... try it
   //$headers = array('Content-Type' => 'text/turtle','If-Match' => $etag,'Slug' => $containertitle);
-  $headers = array('Content-Type' => 'text/turtle','If-Match' => $etag);
+  $headers = array('Content-Type' => 'text/turtle','If-Match' => $etag,'Authorization' => 'Basic '.$auth);
   //$headers = array('Content-Type' => 'text/turtle','If-Match' => 'W/"1459004153000"','Slug' => 'Penguins are Awesome');
   $response = Requests::put($url, $headers, $data);
   //$response = Requests:_put($url, $headers, json_encode($data));
