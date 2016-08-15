@@ -3,7 +3,8 @@ include('./Requests/library/Requests.php');
 Requests::register_autoloader();
 //$filename = 'first_one-hundred-nasa-spacecraft-filtered-addjpg.nt';
 //$filename = 'first_one-hundred-nasa-spacecraft-filtered.nt';
-$filename = 'nasa-spacecraft-filtered.nt';
+$filename = 'noclosedloop.nt';
+//$filename = 'nasa-spacecraft-filtered.nt';
 //$filename = 'nasa-spacecraft-selected.nt';
 $dbg = 1;
 $fp = fopen($filename,'rw');
@@ -28,7 +29,7 @@ if($dbg == 1) {
 echo 'This is the start of map two'."\n";
 }
 foreach($filerow_to_array as $key => $value) {
-  $matchtwo = preg_match('/^<[0-9A-Za-z:_\.\/#-]*>/',$filerow_to_array[$key],$matches);
+  $matchtwo = preg_match('/^<[0-9A-Za-z:_\.\/#=+?-]*>/',$filerow_to_array[$key],$matches);
   if($matchtwo == 1) {
     if($dbg == 1) {
     echo $matches[0]."\n";
@@ -40,7 +41,7 @@ if($dbg == 1) {
 echo 'code to grab to object uris'."\n";
 }
 foreach($filerow_to_array as $key => $value) {
-  $matchtwo = preg_match('/<[a-zA-Z0-9_:#-\/\.]*> .$/',$filerow_to_array[$key],$matches);
+  $matchtwo = preg_match('/<[0-9A-Za-z:_\.\/#=+?-]*> .$/',$filerow_to_array[$key],$matches);
   if($matchtwo == 1) {
     if($dbg == 1) {
     echo $matches[0]."\n";
@@ -57,7 +58,7 @@ echo 'end of code to grab the object uris'."\n";
 
 // code to select what you want from object uris..
 
-$selectedobjecturiprefixes = array('data.kasabi.com');
+$selectedobjecturiprefixes = array('lunarsettlementindex.org');
 
 $objectmatches = array();
 
@@ -114,7 +115,7 @@ echo "\n";
 
 foreach($array_three as $key => $value) {
   // match each element with an extension
-   $string_two = preg_match('/^<[0-9A-Za-z:_\/\.#]*\.[A-Za-z]{3,}>/',$array_three[$key],$matches);
+   $string_two = preg_match('/^<[0-9A-Za-z:_\.\/#=+?-]*\.[A-Za-z]{3,}>/',$array_three[$key],$matches);
   // preg_match('/[0-9A-Za-z_\.]*$>/',$array_three[$key],$matches);
   if($dbg == 1) {
   echo $string_two.'is the man';
@@ -238,7 +239,7 @@ foreach($array_three_ext as $keyone => $value) {
 // explode array element into ldp container
 foreach($array_three_rebased_rebased as $key => $value) {
   $replace_one =  preg_replace('/[<>]/','',$array_three_rebased_rebased[$key]);
-  $replace_two = preg_replace('/http:\/\/[a-zA-Z0-9\.-]*\//','',$replace_one);
+  $replace_two = preg_replace('/http:\/\/[0-9A-Za-z:_\.\/#=+?-]*\//','',$replace_one);
   $explodintoldpcontainer = explode('/',$replace_two);
   foreach($explodintoldpcontainer as $key_three => $value) {
     $array_six[strval($array_three_rebased_rebased[$key])][$key_three] = strval($explodintoldpcontainer[$key_three]);
@@ -259,7 +260,7 @@ $matchesarraytwo = array();
 $regexstringforcontainer = $keyone;
 //$ahappystring = '<http://data.kasabi.com/dataset/nasa/launchsite/hammaguir>';
 $pattern = preg_quote($regexstringforcontainer,'/');
-$regex = '/^'.$pattern.' <[a-zA-Z0-9_:#-\/\.]*> (<[a-zA-Z0-9_:#-\/\.]*>|"[a-z ,A-z0-9-]*") ./';
+$regex = '/^'.$pattern.' <[0-9A-Za-z:_\.\/#=+?-]*> (<[0-9A-Za-z:_\.\/#=+?-]*>|"[a-z ,A-z0-9-]*") ./';
 
 
 foreach($filerow_to_array as $key => $value) {
@@ -287,7 +288,7 @@ if($dbg == 1){
 // replace the period at the end of each triple with a semicolon
  $matchesarraytwo[$key] = preg_replace('/.$/','; ',$matchesarraytwo[$key]);
  // remove the first element in the triple to prepare to write as compacted turtle
- $matchesarraytwo[$key] = preg_replace('/^<[0-9A-Za-z\.\/_#:-]*> /','',$matchesarraytwo[$key]);
+ $matchesarraytwo[$key] = preg_replace('/^<[0-9A-Za-z:_\.\/#=+?-]*> /','',$matchesarraytwo[$key]);
 }
 
 // Create the raw data to post of the ldp container
@@ -356,7 +357,7 @@ $string = $rootcontainer;
   if($changedata == 1) {
      $matchelementindata = $matches[0];
      // Transform the data matches to the local namespace
-     $tolocalnamespace = preg_replace('/http:\/\/[A-Za-z0-9\.]*\//',$rootcontainer,$matchelementindata);
+     $tolocalnamespace = preg_replace('/http:\/\/[0-9A-Za-z:_\.\/#=+?-]*\//',$rootcontainer,$matchelementindata);
      // perform replacements in the data
      $datatemp = preg_replace($regexforreplaceindata,$tolocalnamespace,$data);
      $data = $datatemp;
@@ -399,7 +400,7 @@ foreach($array_three_ext as $key => $value) {
   $arrayelementasstring = $array_three_ext[$key];
   $pattern = preg_quote($arrayelementasstring,'/');
   // match triples with the subject uri with the file extension
-  $regex = '/^'.$pattern.' <[a-zA-Z0-9_:#-\/\.]*> (<[a-zA-Z0-9_:#-\/\.]*>|"[a-z ,A-z0-9-]*") ./';
+  $regex = '/^'.$pattern.' <[0-9A-Za-z:_\.\/#=+?-]*> (<[0-9A-Za-z:_\.\/#=+?-]*>|"[a-z ,A-z0-9-]*") ./';
 
 foreach($filerow_to_array as $key => $value) {
   // grab all triples in the raw data that have the subject uri with the file extension
@@ -416,7 +417,7 @@ foreach($filerow_to_array as $key => $value) {
     // replace the period at the end of each triple with a semicolon
     $matchesarraytwo[$key] = preg_replace('/.$/','; ',$matchesarraytwo[$key]);
     // remove the first element in the triple to prepare to write as compacted turtle
-    $matchesarraytwo[$key] = preg_replace('/^<[0-9A-Za-z\.\/_#:-]*> /','',$matchesarraytwo[$key]);
+    $matchesarraytwo[$key] = preg_replace('/^<[0-9A-Za-z:_\.\/#=+?-]*> /','',$matchesarraytwo[$key]);
   }
 
   // create a string from the array...
@@ -440,7 +441,7 @@ foreach($filerow_to_array as $key => $value) {
      if($dbg == 1){
       echo 'I have a container match in the post data'.$array_three_rebased_rebased[$key]."\n";
     }
-      $containerfileexttriples = preg_replace('/http:\/\/[A-Za-z\.]*/',$rootcontainer,$array_three_rebased_rebased[$key]);
+      $containerfileexttriples = preg_replace('/http:\/\/[0-9A-Za-z:_\.\/#=+?-]*/',$rootcontainer,$array_three_rebased_rebased[$key]);
      if($dbg == 1){
       echo 'The title for the post container is'.$containerfileexttriples."\n";
      }
@@ -463,7 +464,6 @@ foreach($filerow_to_array as $key => $value) {
 
 // create a function that creates an ldp container..and that is it...
 function createldpcontainer($rootcontainer,$target_container,$dbg) {
-  $auth = base64_encode('username:password');
   $url = $rootcontainer.$target_container;
   $headers = array('Accept' => 'text/turtle');
   // first check to see if the container exists
@@ -474,13 +474,13 @@ function createldpcontainer($rootcontainer,$target_container,$dbg) {
   }
   // create the container if it does not exist..
   if($response->status_code == 404) {
-    $headers_two = array('Content-Type' => 'text/turtle','Slug' => $target_container,'Authorization' => 'Basic '.$auth);
+    $headers_two = array('Content-Type' => 'text/turtle','Slug' => $target_container);
     $response = Requests::post($rootcontainer, $headers_two);
     $string = $response->raw;
     // match the url in the raw response
-    preg_match('/Location: http[:\/a-z0-9-_A-Z]*/',$string,$matches);
+    preg_match('/Location: http[0-9A-Za-z:_\.\/#=+?-]*/',$string,$matches);
     $substring = $matches[0];
-    preg_match('/http[:\/a-z0-9-_A-Z]*/',$substring,$matches);
+    preg_match('/http[0-9A-Za-z:_\.\/#=+?-]*/',$substring,$matches);
     $url = $matches[0];
   }
 }
@@ -488,7 +488,6 @@ function createldpcontainer($rootcontainer,$target_container,$dbg) {
 // create a function that posts data to a container
 function putrequest($data,$url,$dbg) {
   //$url = 'http://localhost:8080/marmotta/ldp/'.$containertitle;
-  $auth = base64_encode('username:password');
   $existingheaders = get_headers($url);
   if($dbg == 1){
   print_r($existingheaders);
@@ -502,7 +501,7 @@ function putrequest($data,$url,$dbg) {
   }
   // do I need the container tag in the header for the put request, it would be easier if I did not need to know ... try it
   //$headers = array('Content-Type' => 'text/turtle','If-Match' => $etag,'Slug' => $containertitle);
-  $headers = array('Content-Type' => 'text/turtle','If-Match' => $etag,'Authorization' => 'Basic '.$auth);
+  $headers = array('Content-Type' => 'text/turtle','If-Match' => $etag);
   //$headers = array('Content-Type' => 'text/turtle','If-Match' => 'W/"1459004153000"','Slug' => 'Penguins are Awesome');
   $response = Requests::put($url, $headers, $data);
   //$response = Requests:_put($url, $headers, json_encode($data));
